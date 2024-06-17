@@ -10,6 +10,7 @@ init:
 	cargo install git-cliff
 	cargo install cargo-nextest --locked
 	pre-commit install
+	sed -i '' 's#rust-learn-days/template#rust-learn-days/{{project-name}}#g' cliff.toml
 
 install:
 	rustup override set nightly
