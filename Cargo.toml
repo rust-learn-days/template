@@ -1,0 +1,8 @@
+[package]
+name = "{{project-name}}"
+version = "0.1.0"
+authors = ["{{authors}}"]
+edition = "2024"
+description = "{{project-name}}, a rusty-hermit application"
+repository = "https://github.com/{{username}}/{{project-name}}"
+[dependencies]
