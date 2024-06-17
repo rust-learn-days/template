@@ -1,4 +1,9 @@
 init:
+	git init
+	git add .
+	git commit -m "init"
+	git branch -M main
+	git remote add origin git@github.com:rust-learn-days/{{project-name}}.git
 	pip install pre-commit
 	cargo install --locked cargo-deny
 	cargo install typos-cli
