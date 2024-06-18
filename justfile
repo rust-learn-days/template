@@ -15,22 +15,24 @@ init:
 
 
 build:
-    cargo build --target  ${target:-x86_64-unknown-linux-musl}
+    rustup target add ${target}
+    cargo build --target  ${target}
+
+cross-build:
+    rustup target add ${target}
+    cross build --target  ${target}
+
+cross-build-release:
+    rustup target add ${target}
+    cross build --release --target  ${target}
+    mkdir -p output/${target}
+    cp target/${target}/release/{{project-name}} output/${target}/{{project-name}}
 
 build-release:
-    cargo build --release --target  ${target:-x86_64-unknown-linux-musl}
+    rustup target add ${target}
+    cargo build --release --target  ${target}
+    mkdir -p output/${target}
+    cp target/${target}/release/{{project-name}} output/${target}/{{project-name}}
 
-build-all:
-    cargo build --target x86_64-unknown-linux-musl
-    cargo build --target aarch64-unknown-linux-gnu
-    cargo build --target x86_64-apple-darwin
-    cargo build --target aarch64-apple-darwin
-    cargo build --target x86_64-pc-windows-msvc
-
-
-install:
-    rustup target add x86_64-unknown-linux-musl
-    rustup target add x86_64-apple-darwin
-    rustup target add x86_64-pc-windows-msvc
-    rustup target add aarch64-unknown-linux-gnu
-    rustup target add aarch64-apple-darwin
+changelog:
+    git-cliff --config cliff.toml > CHANGELOG.md
