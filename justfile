@@ -1,4 +1,5 @@
 init:
+    sed -i '' 's#rust-learn-days/template#rust-learn-days/{{project-name}}#g' cliff.toml
 	git init
 	git add .
 	git commit -m "init"
@@ -9,10 +10,10 @@ init:
 	cargo install typos-cli
 	cargo install git-cliff
 	cargo install cargo-nextest --locked
-	cargo install cross --git https://github.com/cross-rs/cross
 	pre-commit install
-	sed -i '' 's#rust-learn-days/template#rust-learn-days/{{project-name}}#g' cliff.toml
 
+install-cross:
+    cargo install cross --git https://github.com/cross-rs/cross
 
 build:
     rustup target add ${target}
