@@ -1,7 +1,9 @@
-FROM rust:1.71 as builder
-WORKDIR /app
+FROM --platform=$BUILDPLATFORM rust:latest as builder
 COPY . .
-RUN make build
+RUN cargo install --path .
 
-FROM scratch
-COPY --from=builder /app/plugin.wasm ./
+FROM debian:bookworm-slim
+# RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /usr/local/cargo/bin/{{project-name}} /usr/bin/{{project-name}}
+ENV USER root
+ENTRYPOINT ["/usr/bin/{{project-name}}"]
