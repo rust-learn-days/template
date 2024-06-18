@@ -69,15 +69,11 @@ jobs:
       - name: Release build
         if: ${{ matrix.os != 'ubuntu-latest' }}
         run: target=${{ matrix.target }} just build-release
-      - name: Create artifact
-        run: |
-          cd output/${{ matrix.target }}
-          tar -zcvf first-${{ matrix.target }}.tar.gz first
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: first-${{ matrix.target }}
-          path: output/${{ matrix.target }}/first-${{ matrix.target }}.tar.gz
+          name: ${{ matrix.target }}
+          path: output/${{ matrix.target }}/*.tar.gz
 
   release:
     name: Create Draft Release

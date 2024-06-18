@@ -27,12 +27,14 @@ cross-build-release:
     cross build --release --target  ${target}
     mkdir -p output/${target}
     cp target/${target}/release/{{project-name}} output/${target}/{{project-name}}
+    cd output/${target} && tar -zcvf {{project-name}}-${target}.tar.gz {{project-name}}
 
 build-release:
     rustup target add ${target}
     cargo build --release --target  ${target}
     mkdir -p output/${target}
     cp target/${target}/release/{{project-name}} output/${target}/{{project-name}}
+    cd output/${target} && tar -zcvf {{project-name}}-${target}.tar.gz {{project-name}}
 
 changelog:
     git-cliff --config cliff.toml > CHANGELOG.md
