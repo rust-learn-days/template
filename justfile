@@ -39,3 +39,12 @@ build-release:
 
 changelog:
     git-cliff --config cliff.toml > CHANGELOG.md
+
+line:
+    tokei .
+
+check:
+    cargo check
+    cargo fmt -- --check
+    cargo deny check -d
+    cargo nextest run --all-features
